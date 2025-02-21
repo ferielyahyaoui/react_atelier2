@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card,Button,Alert } from 'react-bootstrap';
 import Placeholder from '../assets/placeholder.jpg';
 import { use } from "react";
+import { Link } from "react-router-dom";
 function Event({event,handleClick}){
     const images= import.meta.glob("../assets/*",{eager:true});
     const getImagePath=(img)=>{
@@ -30,6 +31,7 @@ function Event({event,handleClick}){
 
         <Button className='mb-4' onClick={()=>setLiked(!like)}>{like? "Dislike":"Like"}</Button>
         <Button className='mb-4' onClick={()=>handleClick(event.name)} disabled={event.nbTickets==0}>Book an event</Button>
+        <Button className="btn btn-outline-primary" > <Link to={`/by/price/${price}`}></Link>Voir Details</Button>
       </Card.Body>
     </Card>
     )

@@ -1,18 +1,22 @@
+import { NavLink } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 function Header() {
-    const items = ['Home', 'About', 'Contact', 'Login'];
 
     return (
-        <>
-            <header style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <ul style={{ display: 'flex', flexDirection: 'row', listStyle: 'none', margin: 0, padding: 0 }}>
-                    {items.map((item, index) => (
-                        <li key={index} style={{ margin: '0 15px', fontSize: '18px', fontWeight: 'bold', cursor: 'pointer' }}>
-                            {item}
-                        </li>
-                    ))}
-                </ul>
-            </header>
-        </>
+        <nav>
+          <ul className="d-flex justify-content-center align-items-center mt-5">
+            <li className="mx-3">
+              <NavLink to="/events" className={({isActive})=>(isActive? "btn active-btn":"btn")}>Events</NavLink>
+            </li>
+            <li className="mx-3">
+              <NavLink to="/login" >Login</NavLink>
+            </li>
+            <li className="mx-3">
+              <NavLink to="/addevent">Ajouter un événement</NavLink>
+            </li>
+          </ul>
+        </nav>
     );
 }
 

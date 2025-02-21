@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Event from "./Event";
 import data from '../data/events.json'
-
+import Header from "../Header";
 function Events(){
     const event1={
     "name": "Festival international de Carthage",
@@ -20,12 +20,16 @@ function Events(){
         :event))
     }
     return (
+        <>
+        <Header></Header>
+        <h1>Events components</h1>
         <div className="d-flex flex-wrap">
         {events.map((event,index)=>
         <Event key={index} event={event} handleClick={handleClick}/>
         )}
         
         </div>
+        </>
     )
 }
 export default Events;
