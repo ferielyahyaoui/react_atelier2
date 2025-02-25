@@ -4,7 +4,7 @@ function ErrorPage(){
 
     return(
         <>
-        <h1>Not found!</h1>
+      <img src="/src/assets/notfound.jpg" alt="Not Found" />
         
         </>
 

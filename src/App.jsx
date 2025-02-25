@@ -17,6 +17,7 @@ import Login from './Login';
 import AjouterEvent from './AjouterEvent';
 import EventPrice from './EventPrice';
 import ErrorPage from './ErrorPage';
+
 //consr Home=Lazy()=>import ("./header.jsx")
 
 function App() {
@@ -46,6 +47,8 @@ function App() {
     <Route path="/" element={<Home/>}/>
     <Route path="/addevent" element={<AjouterEvent/>}/>
     <Route path="/by/price/:price" element={<EventPrice/>}/>
+
+
     <Route path="*" element={<ErrorPage/>}/>
     </Routes>
      {/* <Footer></Footer> */}

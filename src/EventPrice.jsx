@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 function EventPrice(){
     const {price}=useParams();
+    const {name}=useParams();
     useEffect(()=>{
         console.log(price);
     })

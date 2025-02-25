@@ -1,39 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { Card,Button,Alert } from 'react-bootstrap';
-import Placeholder from '../assets/placeholder.jpg';
-import { use } from "react";
+import { Card, Button, Alert } from "react-bootstrap";
+import Placeholder from "../assets/placeholder.jpg";
 import { Link } from "react-router-dom";
-function Event({event,handleClick}){
-    const images= import.meta.glob("../assets/*",{eager:true});
-    const getImagePath=(img)=>{
-        return images[`../assets/${img}`]?.default || Placeholder;
-    }
-    const [like,setLiked]=useState(false);
-    const [showAlert,setshowAlert]=useState(true);
-    useEffect(() => {
-        const timer = setTimeout(() => setshowAlert(false), 3000);
-        return () => clearTimeout(timer);
-    }, []);
-    
-    return (
-    <Card>
-     {showAlert && <Alert> Welcome to Esprit event </Alert>}
+import "../components/Event.css"; 
 
-      <Card.Img src={getImagePath(event.img)}/>
+function Event({ event, handleClick }) {
+  const images = import.meta.glob("../assets/*", { eager: true });
+
+  const getImagePath = (img) => {
+    return images[`../assets/${img}`]?.default || Placeholder;
+  };
+
+  const [like, setLiked] = useState(false);
+  const [showAlert, setShowAlert] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowAlert(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Card className="event-card">
+      {showAlert && <Alert variant="info">Welcome to Esprit event</Alert>}
+
+      <Card.Img variant="top" src={getImagePath(event.img)} />
+
       <Card.Body>
-        <Card.Title>{event.name}</Card.Title>
-        <Card.Text> 
-         Price :{event.price} <br />
-        nbTickets: {event.nbTickets} <br />
-        nbParticipants :{event.nbParticipants}
+        <Card.Title>
+          <Link to={`/by/price/${event.price}`} className="event-link">
+            {event.name}
+          </Link>
+        </Card.Title>
+
+        <Card.Text>
+          <strong>Price:</strong> {event.price} DT <br />
+          <strong>Number of tickets:</strong> {event.nbTickets} <br />
+          <strong>Number of participants:</strong> {event.nbParticipants}
 
         </Card.Text>
 
-        <Button className='mb-4' onClick={()=>setLiked(!like)}>{like? "Dislike":"Like"}</Button>
-        <Button className='mb-4' onClick={()=>handleClick(event.name)} disabled={event.nbTickets==0}>Book an event</Button>
-        <Button className="btn btn-outline-primary" > <Link to={`/by/price/${price}`}></Link>Voir Details</Button>
+        <div className="event-buttons">
+          <Button className="like-btn" onClick={() => setLiked(!like)}>
+            {like ? "Dislike" : "Like"}
+          </Button>
+
+          <Button
+            className="book-btn"
+            onClick={() => handleClick(event.name)}
+            disabled={event.nbTickets === 0}
+          >
+            Book an event
+          </Button>
+        </div>
       </Card.Body>
     </Card>
-    )
+  );
 }
+
 export default Event;
